@@ -17,4 +17,12 @@ subTests = TestList [TestLabel "Subtraction Test 1" subTest1,
                     TestLabel "Subtraction Test 2" subTest2,
                     TestLabel "Subtraction Test 3" subTest3]
 
-tests = TestList [addTests, subTests]
+addInvModPTest1 = TestCase (assertEqual "for 2 (mod 5)" (addInvModP (IntModP 2 5)) (IntModP 3 5))
+addInvModPTest2 = TestCase (assertEqual "for 3 (mod 4)" (addInvModP (IntModP 3 4)) (IntModP 1 4))
+addInvModPTest3 = TestCase (assertEqual "for 1 (mod 4)" (addInvModP (IntModP 1 4)) (IntModP 3 4))
+
+addInvModPTests = TestList [TestLabel "Additive Inverse Test 1" addInvModPTest1,
+                    TestLabel "Additive Inverse Test 2" addInvModPTest2,
+                    TestLabel "Additive Inverse Test 3" addInvModPTest3]
+
+tests = TestList [addTests, subTests, addInvModPTests]
