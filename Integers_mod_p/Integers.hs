@@ -14,11 +14,17 @@ data IntModP = IntModP Integer Integer deriving (Show, Eq)
 
 -- addition
 addModP :: IntModP -> IntModP -> IntModP
-addModP (IntModP xn xp) (IntModP yn yp) = IntModP (assert (xp == yp) ((xn + yn) `mod` xp)) xp
+addModP x y = IntModP (assert (xp == yp) ((xn + yn) `mod` xp)) xp
+            where
+                IntModP xn xp = x
+                IntModP yn yp = y
 
 -- subtraction
 subModP :: IntModP -> IntModP -> IntModP
-subModP (IntModP xn xp) (IntModP yn yp) = IntModP (assert (xp == yp) ((xn - yn) `mod` xp)) xp
+subModP x y = IntModP (assert (xp == yp) ((xn - yn) `mod` xp)) xp
+            where
+                IntModP xn xp = x
+                IntModP yn yp = y
 
 -- additive inverse
 addInvModP :: IntModP -> IntModP
@@ -26,7 +32,10 @@ addInvModP (IntModP n p) = IntModP (p - n `mod` p) p
 
 -- multiplication
 mulModP :: IntModP -> IntModP -> IntModP
-mulModP (IntModP xn xp) (IntModP yn yp) = IntModP (assert (xp == yp) ((xn * yn) `mod` xp)) xp
+mulModP x y = IntModP (assert (xp == yp) ((xn * yn) `mod` xp)) xp
+            where
+                IntModP xn xp = x
+                IntModP yn yp = y
 
 -- multiplicative inverse
 -- p must be prime
@@ -41,7 +50,8 @@ mulInvModP (IntModP n p) = IntModP (i `mod` p) p
 -- division
 -- p must be prime
 divModP :: IntModP -> IntModP -> IntModP
-divModP (IntModP xn xp) (y) = IntModP (assert (xp == yp) ((xn * yn) `mod` xp)) xp
+divModP x y = IntModP (assert (xp == yp) ((xn * yn) `mod` xp)) xp
                             where
+                                IntModP xn xp = x
                                 IntModP yn yp = mulInvModP y
 
