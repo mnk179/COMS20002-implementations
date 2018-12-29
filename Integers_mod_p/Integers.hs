@@ -16,3 +16,7 @@ subModP (IntModP xn xp) (IntModP yn yp) = IntModP (assert (xp == yp) ((xn - yn) 
 -- the additive inverse
 addInvModP :: IntModP -> IntModP
 addInvModP (IntModP n p) = IntModP (p - n `mod` p) p
+
+-- multiplication
+mulModP :: IntModP -> IntModP -> IntModP
+mulModP (IntModP xn xp) (IntModP yn yp) = IntModP (assert (xp == yp) ((xn * yn) `mod` xp)) xp
