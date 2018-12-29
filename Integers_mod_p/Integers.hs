@@ -29,6 +29,7 @@ mulModP :: IntModP -> IntModP -> IntModP
 mulModP (IntModP xn xp) (IntModP yn yp) = IntModP (assert (xp == yp) ((xn * yn) `mod` xp)) xp
 
 -- multiplicative inverse
+-- p must be prime
 mulInvModP :: IntModP -> IntModP
 mulInvModP (IntModP n p) = IntModP (i `mod` p) p
                         where
@@ -36,3 +37,11 @@ mulInvModP (IntModP n p) = IntModP (i `mod` p) p
                             -- that represents
                             -- i * n + _ * p = gcd(n, p) = 1 (since p is prime)
                             (i, _, _) = extGCD n p
+
+-- division
+-- p must be prime
+divModP :: IntModP -> IntModP -> IntModP
+divModP (IntModP xn xp) (y) = IntModP (assert (xp == yp) ((xn * yn) `mod` xp)) xp
+                            where
+                                IntModP yn yp = mulInvModP y
+

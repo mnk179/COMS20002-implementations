@@ -34,13 +34,22 @@ mulTests = TestList [TestLabel "Multiplication Test 1" mulTest1,
                     TestLabel "Multiplication Test 3" mulTest3]
 
 mulInvTest1 = TestCase (assertEqual "for 2 (mod 5)" (mulInvModP (IntModP 2 5)) (IntModP 3 5))
-mulInvTest2 = TestCase (assertEqual "for 3 (mod 4)" (mulInvModP (IntModP 3 7)) (IntModP 5 7))
-mulInvTest3 = TestCase (assertEqual "for 1 (mod 4)" (mulInvModP (IntModP 1 11)) (IntModP 1 11))
-mulInvTest4 = TestCase (assertEqual "for 1 (mod 4)" (mulInvModP (IntModP 7 11)) (IntModP 8 11))
+mulInvTest2 = TestCase (assertEqual "for 3 (mod 7)" (mulInvModP (IntModP 3 7)) (IntModP 5 7))
+mulInvTest3 = TestCase (assertEqual "for 1 (mod 11)" (mulInvModP (IntModP 1 11)) (IntModP 1 11))
+mulInvTest4 = TestCase (assertEqual "for 7 (mod 11)" (mulInvModP (IntModP 7 11)) (IntModP 8 11))
 
 mulInvTests = TestList [TestLabel "Multiplicative Inverse Test 1" mulInvTest1,
                     TestLabel "Multiplicative Inverse Test 2" mulInvTest2,
                     TestLabel "Multiplicative Inverse Test 3" mulInvTest3,
                     TestLabel "Multiplicative INverse Test 4" mulInvTest4]
 
-tests = TestList [addTests, subTests, addInvTests, mulTests, mulInvTests]
+divTest1 = TestCase (assertEqual "for 2 / 3 (mod 5)" (divModP (IntModP 2 5) (IntModP 3 5)) (IntModP 4 5))
+divTest2 = TestCase (assertEqual "for 3 / 2 (mod 7)" (divModP (IntModP 3 7) (IntModP 2 7)) (IntModP 5 7))
+divTest3 = TestCase (assertEqual "for 1 * 2 (mod 11)" (divModP (IntModP 1 11) (IntModP 2 11)) (IntModP 6 11))
+divTest4 = TestCase (assertEqual "for 5 / 6 (mod 13)" (divModP (IntModP 5 13) (IntModP 6 13)) (IntModP 3 13))
+
+divTests = TestList [TestLabel "Division Test 1" divTest1,
+                    TestLabel "Division Test 2" divTest2,
+                    TestLabel "Division Test 3" divTest3]
+
+tests = TestList [addTests, subTests, addInvTests, mulTests, mulInvTests, divTests]
